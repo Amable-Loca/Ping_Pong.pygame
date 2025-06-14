@@ -61,7 +61,13 @@ run = True
 while run:
     for e in event.get():
         if e.type == QUIT:
-            run = False 
+            run = False
+        if e.type == KEYDOWN:
+            if e.key == K_r:
+                finish = False
+                pelota.rect.x = 50 
+                pelota.rect.y = 50
+                speed_x, speed_y = 5, 5
 
     if not finish:
         screen.fill(COLOR_FONDO)
@@ -88,8 +94,8 @@ while run:
             win_p1 = font_1.render('GANADOR JUGADOR 1', 1, BLANCO)
             screen.blit(win_p1, (100, 250))
             finish = True
-   
-        if pelota.rect.x <= -50:
+
+        if pelota.rect.x < -50:
             win_p2 = font_1.render('GANADOR JUGADOR 2', 1, BLANCO)
             screen.blit(win_p2, (100, 250))
             finish = True
