@@ -47,6 +47,7 @@ player_1 = Player(PLAYER_IMG, 5, 250, 30, 100, 5)
 player_2 = Player(PLAYER_IMG, 715,250,30,100,5  )
 pelota = GameSprite(PELOTA,350,250, 40 ,40 , 10)
 
+speed_x, speed_y = 2,2
 clok = time.Clock()
 finish = False
 run = True
@@ -55,16 +56,28 @@ while run:
         if e.type == QUIT:
             run = False 
 
-    screen.fill(COLOR_FONDO)
-    player_1.reset()
-    player_1.update_1()
-    player_2.reset()
-    player_2.update_2()
-    pelota.reset()
 
+
+    if not finish:
+        screen.fill(COLOR_FONDO)
+        player_1.reset()
+        player_1.update_1()
+        player_2.reset()
+        player_2.update_2()
+        pelota.reset()
+
+        pelota.rect.x +=  speed_x
+        pelota.rect.y +=  speed_y
    
-   
-   
+    if  pelota.rect.y>=ALTO - pelota.height:
+        speed_y *= -1
+    if  pelota.rect.y <= 0:
+        speed_y *= -1
+    if sprite.collide_rect (pelota,player_1):
+        speed_x *=-1
+    if sprite.collide_rect(pelota,player_2):
+        speed_x *=-1
+
    
    
     display.update()
