@@ -5,7 +5,7 @@ ANCHO, ALTO = 753, 553
 COLOR_FONDO = (179, 224, 230)
 FPS = 120
 PLAYER_IMG = 'racket.png'
-
+PELOTA ='pelota.png'
 
 screen = display.set_mode((ANCHO, ALTO))
 display.set_caption('PING_PONG') 
@@ -43,8 +43,9 @@ class Player(GameSprite):
             self.rect.y += self.speed
 
 
-player_1 = Player(PLAYER_IMG, 5, 250, 30, 80, 5)
-player_2 = Player(PLAYER_IMG, 715,250,30,80,5  )
+player_1 = Player(PLAYER_IMG, 5, 250, 30, 100, 5)
+player_2 = Player(PLAYER_IMG, 715,250,30,100,5  )
+pelota = GameSprite(PELOTA,350,250, 40 ,40 , 10)
 
 clok = time.Clock()
 finish = False
@@ -59,6 +60,13 @@ while run:
     player_1.update_1()
     player_2.reset()
     player_2.update_2()
+    pelota.reset()
+
+   
+   
+   
+   
+   
     display.update()
     clok.tick(FPS)
 
