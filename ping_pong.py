@@ -89,6 +89,11 @@ while run:
             screen.blit(win_p1, (100, 250))
             finish = True
    
+        if pelota.rect.x <= -50:
+            win_p2 = font_1.render('GANADOR JUGADOR 2', 1, BLANCO)
+            screen.blit(win_p2, (100, 250))
+            finish = True
+   
     display.update()
     clok.tick(FPS)
 
