@@ -3,15 +3,18 @@ init()
 font.init()
 
 ANCHO, ALTO = 753, 553
-COLOR_FONDO = (179, 224, 230)
-BLANCO = (255, 255, 255)
+FONDO = 'mesa ainhoa.PNG'
+BLANCO = ( 10, 1, 1)
 FPS = 120
-PLAYER_IMG = 'racket.png'
-PELOTA = 'pelota.png'
+PLAYER_2 ='raqueta azul ainhoa.png' 
+PLAYER_1 = 'raqueta roja ainhoa.png'
+PELOTA = 'pelota-ainhoa.png'
 FUENTE = 'Pixelcraft.ttf'
 
 screen = display.set_mode((ANCHO, ALTO))
 display.set_caption('PING_PONG')
+fondo = transform.scale(image.load(FONDO),(ANCHO , ALTO))
+
 
 font_1 = font.Font(FUENTE, 50)
 
@@ -48,8 +51,8 @@ class Player(GameSprite):
             self.rect.y += self.speed
 
 
-player_1 = Player(PLAYER_IMG, 5, 250, 30, 100, 5)
-player_2 = Player(PLAYER_IMG, 715, 250, 30, 100, 5)
+player_1 = Player(PLAYER_1, 5, 250, 30, 100, 5)
+player_2 = Player(PLAYER_2, 715, 250, 30, 100, 5)
 pelota = GameSprite(PELOTA, 50, 50, 40, 40, 1)
 
 speed_x, speed_y = 5, 5
@@ -70,7 +73,7 @@ while run:
                 speed_x, speed_y = 5, 5
 
     if not finish:
-        screen.fill(COLOR_FONDO)
+        screen.blit(fondo, (0,0))
         player_1.reset()
         player_1.update_1()
         player_2.reset()
@@ -104,3 +107,6 @@ while run:
     clok.tick(FPS)
 
 quit()
+
+
+
