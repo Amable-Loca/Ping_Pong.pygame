@@ -1,15 +1,18 @@
 from pygame import *
 init()
 font.init()
+mixer.init()
 
-ANCHO, ALTO = 753, 553
-FONDO = 'mesa ainhoa.PNG'
+ANCHO, ALTO = 750, 550
+FONDO = 'fondo.png'
 BLANCO = ( 10, 1, 1)
 FPS = 120
-PLAYER_2 ='raqueta azul ainhoa.png' 
-PLAYER_1 = 'raqueta roja ainhoa.png'
-PELOTA = 'pelota-ainhoa.png'
-FUENTE = 'Pixelcraft.ttf'
+PLAYER_2 ='raqueta2.png'
+PLAYER_1 = 'raqueta1.png'
+PELOTA = 'pelota.png'
+FUENTE = 'fuente.ttf'
+BGM1 = 'bgm1.mp3'
+
 
 screen = display.set_mode((ANCHO, ALTO))
 display.set_caption('PING_PONG')
@@ -17,6 +20,11 @@ fondo = transform.scale(image.load(FONDO),(ANCHO , ALTO))
 
 
 font_1 = font.Font(FUENTE, 50)
+
+
+#musica
+mixer.music.load(BGM1)
+mixer.music.play()
 
 class GameSprite(sprite.Sprite):
     def __init__(self,img ,cor_x, cor_y, width, height , speed=0):
@@ -51,9 +59,9 @@ class Player(GameSprite):
             self.rect.y += self.speed
 
 
-player_1 = Player(PLAYER_1, 5, 250, 30, 100, 5)
-player_2 = Player(PLAYER_2, 715, 250, 30, 100, 5)
-pelota = GameSprite(PELOTA, 50, 50, 40, 40, 1)
+player_1 = Player(PLAYER_1, 5, 250, 70, 100, 5)
+player_2 = Player(PLAYER_2, ANCHO -75, 250, 70, 100, 5)
+pelota = GameSprite(PELOTA, 150, 50, 40, 40, 1)
 
 speed_x, speed_y = 5, 5
 
@@ -68,9 +76,10 @@ while run:
         if e.type == KEYDOWN:
             if e.key == K_r:
                 finish = False
-                pelota.rect.x = 50 
+                pelota.rect.x = 150 
                 pelota.rect.y = 50
                 speed_x, speed_y = 5, 5
+                mixer.music.play()
 
     if not finish:
         screen.blit(fondo, (0,0))
@@ -102,11 +111,12 @@ while run:
             win_p2 = font_1.render('GANADOR JUGADOR 2', 1, BLANCO)
             screen.blit(win_p2, (100, 250))
             finish = True
+        
+    if finish :
+        mixer.music.stop()
    
     display.update()
     clok.tick(FPS)
 
 quit()
-
-
 
